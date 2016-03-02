@@ -1,6 +1,10 @@
 import urllib as request_library
+from bs4 import BeautifulSoup
 
-response = request_library.urlopen("https://news.ycombinator.com/")
+response_html = request_library.urlopen("https://news.ycombinator.com/")
+parsed_html = BeautifulSoup(response_html)
 
-for line in response:
-    print line.strip()
+tags = parsed_html('a')
+
+for tag in tags:
+    print tag["href"]
